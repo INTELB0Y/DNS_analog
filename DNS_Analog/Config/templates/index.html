@@ -1,0 +1,44 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Main</title>
+</head>
+<body>
+{% if search %}
+                <form action="" class="search" method="get">
+                    {% csrf_token %}
+<!--                    <h1>fefefefe</h1>-->
+                        {{ search }}
+                </form>
+            {% endif %}
+        <a class="btn" href="{% url 'create' %}">Создать</a>
+
+<div class="container">
+
+    {% for task in tasks %}
+    <div class="card">
+        <img src="http://localhost:8000/media/{{ task.image }}" alt="Img">
+<!--        <img src="" alt="">-->
+<!--        <img src="./media/images/img1.png" alt="Img">-->
+        <h3>__{{ task.title }}__</h3>
+<!--        <p>{{ task.price }}</p>-->
+<!--        <p>{{ task.creator }}</p>-->
+        <a href="{% url 'detail' task.id %}">{{ task.about }}</a>
+        {% if task.is_done %}
+        <p class="done">Сделано</p>
+        {% else %}
+        <p class="fail">Предстоит сделать</p>
+        {% endif %}
+        <a href="{% url 'update' task.id %}">Изменить</a>
+        <a class="delete" id="delete" href="{% url 'delete' task.id %}">Удалить</a>
+    </div>
+    {% endfor %}
+</div>
+<script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
