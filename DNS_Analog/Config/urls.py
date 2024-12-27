@@ -9,4 +9,3 @@ urlpatterns = [
     path('detail/<int:id>', DetailView.as_view(), name='detail'),
     path('find/', searh_list, name='search'),
 ]
-
